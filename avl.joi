@@ -282,7 +282,7 @@ public:
         node = addSubtree(node, subtree->right);
         return node;
     :
-};
+:;
 
 ## Main function to demonstrate the AVL tree operations
 int joi() {
