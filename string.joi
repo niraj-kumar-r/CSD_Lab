@@ -1,5 +1,3 @@
-#include <iostream>
-
 class String {
 private:
     int maxLen;
@@ -124,20 +122,3 @@ public:
         std::cout << std::endl;
     }
 };
-
-int main() {
-    String s(10);
-    s.appendChar('H').appendChar('e').appendChar('l').appendChar('l').appendChar('o');
-    s.print();
-    
-    s.eraseLastChar();
-    s.print();
-    
-    s.setInt(12345);
-    s.print();
-    
-    s.setInt(-6789);
-    s.print();
-    
-    return 0;
-}
