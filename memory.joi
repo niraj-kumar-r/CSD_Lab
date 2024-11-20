@@ -1,30 +1,29 @@
 class Memory
 :
 public:
-    static int *memory;
-    static int *freeList;
-    static int *memoryBottom;
+    int $memory;
+    int $freeList;
+    int $memoryBottom;
 
-    static int heapBottom;
-    static int heapBase;
+    int heapBottom;
+    int heapBase;
 
-    static int heapBottomAddress;
-    static int heapBaseAddress;
+    int heapBottomAddress;
+    int heapBaseAddress;
 
-    static int LENGTH;
-    static int NEXT;
+    int LENGTH;
+    int NEXT;
 
-    static int ALLOC_LENGTH;
+    int ALLOC_LENGTH;
 
-    static int TEmp;
-    static int TEmp1;
-    static
-
+    int TEmp;
+    int TEmp1;
+    
     void init()
     :
         heapBaseAddress = 8192;
         heapBottomAddress = 16384;
-        heapBottomAddress = heapBottomAddress * 4;
+        heapBottomAddress = heapBottomAddress $ 4;
         heapBase = 2048;
         heapBottom = 16384;
 
