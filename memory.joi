@@ -1,9 +1,9 @@
 class Memory
 :
 public:
-    int $memory;
-    int $freeList;
-    int $memoryBottom;
+    int memory;
+    int freeList;
+    int memoryBottom;
 
     int heapBottom;
     int heapBase;
@@ -23,12 +23,12 @@ public:
     :
         heapBaseAddress = 8192;
         heapBottomAddress = 16384;
-        heapBottomAddress = heapBottomAddress $ 4;
+        heapBottomAddress = heapBottomAddress * 4;
         heapBase = 2048;
         heapBottom = 16384;
 
         memory = 0;
-        freeList = (int $)heapBaseAddress;
+        freeList = heapBaseAddress;
         LENGTH = 0;
         NEXT = 4;
         freeList[LENGTH] = heapBottom - heapBase;
@@ -41,20 +41,20 @@ public:
     :
         address = address + address;
         address = address + address;
-        return memory[address];
+        return *(memory + address);
     :
 
     void poke(int address, int value)
     :
         address = address + address;
         address = address + address;
-        memory[address] = value;
+        *(memory + address) = value;
     :
 
-    int $bestFit(int size)
+    int bestFit(int size)
     :
-        int $curBlock;
-        int $bestBlock;
+        int curBlock;
+        int bestBlock;
         int bestSize;
         int curSize;
 
@@ -83,10 +83,10 @@ public:
         return bestBlock;
     :
 
-    void deAlloc(int $object)
+    void deAlloc(int object)
     :
-        int $preBlock;
-        int $nextBlock;
+        int preBlock;
+        int nextBlock;
         int size;
 
         size = object[ALLOC_LENGTH];
@@ -96,7 +96,7 @@ public:
         if preBlock == 0 :
         {
             object[LENGTH] = size;
-            object[NEXT] = (int)freeList;
+            object[NEXT] = freeList;
             freeList = object;
         }
         else : 
@@ -110,21 +110,21 @@ public:
             {
                 object[LENGTH] = size;
                 object[NEXT] = preBlock[NEXT];
-                preBlock[NEXT] = (int)object;
+                preBlock[NEXT] = object;
             }
         }
 
-        if (object - object[LENGTH]) == (int $)object[NEXT] :
+        if (object - object[LENGTH]) == object[NEXT] :
         {
-            nextBlock = (int $)object[NEXT];
+            nextBlock = object[NEXT];
             object[LENGTH] = object[LENGTH] + nextBlock[LENGTH];
             object[NEXT] = nextBlock[NEXT];
         }
     :
 
-    int $findPreFree(int $object)
+    int findPreFree(int object)
     :
-        int $preBlock;
+        int preBlock;
 
         if freeList < object :
         {
@@ -134,7 +134,7 @@ public:
         preBlock = freeList;
         while (preBlock[NEXT] != 0 && preBlock[NEXT] > (int)object) : 
         {
-            preBlock = (int $)preBlock[NEXT];
+            preBlock = preBlock[NEXT];
         }
 
         return preBlock;
@@ -142,9 +142,9 @@ public:
 
     int alloc(int size)
     :
-        int $foundBlock;
-        int $nextBlock;
-        int $result;
+        int foundBlock;
+        int nextBlock;
+        int result;
 
         foundBlock = bestFit(size);
         result = foundBlock + 4;
@@ -161,11 +161,11 @@ public:
             }
             else :
             {
-                nextBlock = (int $)foundBlock[NEXT];
+                nextBlock = foundBlock[NEXT];
                 result[ALLOC_LENGTH] = foundBlock[LENGTH];
             }
         }
 
-        return (int $)result;
+        return result;
     :
 :;
