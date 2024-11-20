@@ -1,5 +1,5 @@
 ## AVL Tree Node class
-class AVLNode {
+class AVLNode :
 public:
     int key;
     AVLNode $left;
@@ -13,7 +13,7 @@ public:
         right = nullptr;
         height = 1;
     :
-};
+:;
 
 ## AVL Tree class
 class AVLTree

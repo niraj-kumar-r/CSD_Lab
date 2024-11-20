@@ -1,14 +1,14 @@
-class String
-{
+class str
+:
 private:
     int maxLen;
     int len;
-    char *chars;
+    char $chars;
 
 public:
-    String(int maxLength)
+    str(int maxLength)
     :
-        if (maxLength == 0):
+        if maxLength == 0:
         {
             maxLength = 1;
         }
@@ -24,7 +24,7 @@ public:
 
     char charAt(int j)
     :
-        if (j < 0 || j >= len)
+        if j < 0 || j >= len:
         {
             return '\0';
         }
@@ -33,26 +33,26 @@ public:
 
     void setCharAt(int j, char c)
     :
-        if (j < 0 || j >= len)
+        if j < 0 || j >= len:
         {
             return;
         }
         chars[j] = c;
     :
 
-    String &appendChar(char c)
+    str &appendChar(char c)
     :
-        if (len < maxLen)
+        if len < maxLen:
         {
             chars[len] = c;
             len++;
         }
-        return *this;
+        return $this;
     :
 
     void eraseLastChar()
     :
-        if (len > 0)
+        if len > 0 :
         {
             len--;
         }
@@ -64,7 +64,7 @@ public:
         int index = 0;
         bool neg = false;
 
-        if (len > 0 && chars[0] == '-')
+        if len > 0 && chars[0] == '-' :
         {
             neg = true;
             index = 1;
@@ -102,7 +102,7 @@ public:
     void setInt(int number)
     :
         erase();
-        if (number < 0)
+        if number < 0 :
         {
             appendChar('-');
             number = -number;
@@ -112,11 +112,11 @@ public:
 
     void setIntHelper(int number)
     :
-        if (number < 10)
+        if number < 10 :
         {
             appendChar(digitToChar(number));
         }
-        else
+        else :
         {
             int nextNum = number / 10;
             setIntHelper(nextNum);
@@ -152,4 +152,4 @@ public:
         }
         cout << std::endl;
     :
-};
+:;
