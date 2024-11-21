@@ -20,6 +20,7 @@ from assembler import Assembler
 
 #read filname from command line
 file_path = sys.argv[1]
+out_file_path = sys.argv[2]
 
 # file_path = "tests/test1.asm"
 with open(file_path, "r") as file:
@@ -42,11 +43,13 @@ assembler.print_binary_text_section()
 #         bin_file.write(int(instruction, 2).to_bytes(4, byteorder='big'))
 
 # text file output to be same filename but with .txt extension and placed in the out directory
-text_file_path = os.path.join("out", os.path.basename(file_path).replace(".asm", ".bin"))
+# text_file_path = os.path.join(file_path.replace(".asm", ".bin"))
 
+# make sure the out directory exists
+if not os.path.exists(os.path.dirname(out_file_path)):
+    os.makedirs(os.path.dirname(out_file_path))
 
-#Print "ENTRY 0000" in the file
-with open(text_file_path, "w") as text_file:
+with open(out_file_path, "w") as text_file:
     text_file.write("ENTRY 0000\n")
     text_file.write(".text\n")
     for instruction in assembler.binary_instructions:
