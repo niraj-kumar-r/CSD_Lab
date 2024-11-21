@@ -82,11 +82,12 @@ if __name__ == '__main__':
     # Get paths for the main file and helper files from arguments
     script_dir = os.path.dirname(__file__)
     main_file_path = sys.argv[1]
-    save_path= sys.argv[-1]+'.asm'
-    main_abs_path = os.path.join(script_dir, main_file_path)
+    # save_path= sys.argv[-1]+'.asm'
+    # main_abs_path = os.path.join(script_dir, main_file_path)
+    save_path= sys.argv[-1]
     
     # Load main file content
-    with open(main_abs_path) as main_file:
+    with open(main_file_path) as main_file:
         main_code = main_file.read()
     
     # Load helper file contents
@@ -105,7 +106,8 @@ if __name__ == '__main__':
     asm_code = asm_generator.generate_target_code(vm_code)
 
     # Write output to the specified asm file
-    output_path = os.path.join(script_dir, save_path)
+    # output_path = os.path.join(script_dir, save_path)
+    output_path = save_path
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w+') as output_file:
         output_file.write(asm_code)
