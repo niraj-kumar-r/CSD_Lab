@@ -1,0 +1,328 @@
+push constant 10 INT
+pop local 0 INT
+function inverseMatrix 3 BOOL
+push argument matrix float
+push argument inverse float
+push argument n int
+push constant 0 INT
+pop local 5 INT
+LABEL #L0
+push local 5 INT
+push local 3 INT
+lt
+JZ, goto end_#L0
+push constant 0 INT
+pop local 6 INT
+LABEL #L1
+push local 6 INT
+push local 3 INT
+lt
+JZ, goto end_#L1
+push local 5 INT
+push local 6 INT
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 2 ptr
+push local 5 INT
+push local 6 INT
+getindex
+push constant 1.0 FLOAT
+store FLOAT
+goto IF_END1
+label IF_FALSE1
+push local 2 ptr
+push local 5 INT
+push local 6 INT
+getindex
+push constant 0.0 FLOAT
+store FLOAT
+goto IF_END1
+label IF_END1
+push local 6 INT
+push constant 1 INT
+add
+pop local 6 INT
+push constant 1 INT
+sub
+goto #L1
+LABEL end_#L1
+push local 5 INT
+push constant 1 INT
+add
+pop local 5 INT
+push constant 1 INT
+sub
+goto #L0
+LABEL end_#L0
+push constant 0 INT
+pop local 5 INT
+LABEL #L2
+push local 5 INT
+push local 3 INT
+lt
+JZ, goto end_#L2
+push local 1 ptr
+push local 5 INT
+push local 5 INT
+getindex
+access float
+pop local 7 FLOAT
+push local 7 FLOAT
+push constant 0.0 FLOAT
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant "Matrix is singular and cannot be inverted." STR
+push data "Matrix is singular and cannot be inverted." STR
+push data \n STR
+push constant 0 BOOL
+return
+goto IF_END2
+label IF_FALSE2
+label IF_END2
+push constant 0 INT
+pop local 6 INT
+LABEL #L3
+push local 6 INT
+push local 3 INT
+lt
+JZ, goto end_#L3
+push local 1 ptr
+push local 5 INT
+push local 6 INT
+getindex
+push local 7 FLOAT
+div
+store FLOAT
+push local 2 ptr
+push local 5 INT
+push local 6 INT
+getindex
+push local 7 FLOAT
+div
+store FLOAT
+push local 6 INT
+push constant 1 INT
+add
+pop local 6 INT
+push constant 1 INT
+sub
+goto #L3
+LABEL end_#L3
+push constant 0 INT
+pop local 8 INT
+LABEL #L4
+push local 8 INT
+push local 3 INT
+lt
+JZ, goto end_#L4
+push local 8 INT
+push local 5 INT
+neq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 1 ptr
+push local 8 INT
+push local 5 INT
+getindex
+access float
+pop local 9 FLOAT
+push constant 0 INT
+pop local 6 INT
+LABEL #L5
+push local 6 INT
+push local 3 INT
+lt
+JZ, goto end_#L5
+push local 1 ptr
+push local 8 INT
+push local 6 INT
+getindex
+push local 9 FLOAT
+push local 1 ptr
+push local 5 INT
+push local 6 INT
+getindex
+access float
+mul
+sub
+store FLOAT
+push local 2 ptr
+push local 8 INT
+push local 6 INT
+getindex
+push local 9 FLOAT
+push local 2 ptr
+push local 5 INT
+push local 6 INT
+getindex
+access float
+mul
+sub
+store FLOAT
+push local 6 INT
+push constant 1 INT
+add
+pop local 6 INT
+push constant 1 INT
+sub
+goto #L5
+LABEL end_#L5
+goto IF_END3
+label IF_FALSE3
+label IF_END3
+push local 8 INT
+push constant 1 INT
+add
+pop local 8 INT
+push constant 1 INT
+sub
+goto #L4
+LABEL end_#L4
+push local 5 INT
+push constant 1 INT
+add
+pop local 5 INT
+push constant 1 INT
+sub
+goto #L2
+LABEL end_#L2
+push constant 1 BOOL
+return
+function joi 0 INT
+pop local 10 int
+push constant "Enter the size of the matrix (n * n): " STR
+push data "Enter the size of the matrix (n * n): " STR
+scan local 10 INT
+push local 10 INT
+push local 0 INT
+gt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant "Matrix size exceeds the maximum allowed size of " STR
+push data "Matrix size exceeds the maximum allowed size of " STR
+push local 0 INT
+push data MAX INT
+push constant "." STR
+push data "." STR
+push data \n STR
+push constant 1 INT
+return
+goto IF_END4
+label IF_FALSE4
+label IF_END4
+push local 0 INT
+alloc MAX int
+push local 0 INT
+alloc MAX int
+pop local 11 ptr
+push local 0 INT
+alloc MAX int
+push local 0 INT
+alloc MAX int
+pop local 12 ptr
+push constant "Enter the elements of the matrix:" STR
+push data "Enter the elements of the matrix:" STR
+push data \n STR
+push constant 0 INT
+pop local 5 INT
+LABEL #L6
+push local 5 INT
+push local 10 INT
+lt
+JZ, goto end_#L6
+push constant 0 INT
+pop local 6 INT
+LABEL #L7
+push local 6 INT
+push local 10 INT
+lt
+JZ, goto end_#L7
+pop local 13 float
+scan local 13 FLOAT
+push local 1 ptr
+push local 5 INT
+push local 6 INT
+getindex
+push local 13 FLOAT
+store FLOAT
+push local 6 INT
+push constant 1 INT
+add
+pop local 6 INT
+push constant 1 INT
+sub
+goto #L7
+LABEL end_#L7
+push local 5 INT
+push constant 1 INT
+add
+pop local 5 INT
+push constant 1 INT
+sub
+goto #L6
+LABEL end_#L6
+push local 11 FLOAT
+push local 12 FLOAT
+push local 10 INT
+call inverseMatrix 3
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant "The inverse of the matrix is: " STR
+push data "The inverse of the matrix is: " STR
+push data \n STR
+push constant 0 INT
+pop local 5 INT
+LABEL #L8
+push local 5 INT
+push local 10 INT
+lt
+JZ, goto end_#L8
+push constant 0 INT
+pop local 6 INT
+LABEL #L9
+push local 6 INT
+push local 10 INT
+lt
+JZ, goto end_#L9
+push local 2 ptr
+push local 5 INT
+push local 6 INT
+getindex
+access float
+push data inverse FLOAT
+push constant "\t" STR
+push data "\t" STR
+push local 6 INT
+push constant 1 INT
+add
+pop local 6 INT
+push constant 1 INT
+sub
+goto #L9
+LABEL end_#L9
+push data \n STR
+push local 5 INT
+push constant 1 INT
+add
+pop local 5 INT
+push constant 1 INT
+sub
+goto #L8
+LABEL end_#L8
+goto IF_END5
+label IF_FALSE5
+push constant "The matrix has no inverse." STR
+push data "The matrix has no inverse." STR
+push data \n STR
+goto IF_END5
+label IF_END5
+push constant 0 INT
+return
+halt

@@ -1,0 +1,65 @@
+function joi 0 INT
+push constant 25 INT
+alloc 25 int
+pop local 0 ptr
+push constant 0 INT
+pop local 1 INT
+push constant 0 INT
+pop local 2 INT
+push constant 0 INT
+pop local 3 INT
+push constant 0 INT
+pop local 4 INT
+push constant 0 INT
+pop local 3 INT
+LABEL #L0
+push local 3 INT
+push constant 5 INT
+lt
+JZ, goto end_#L0
+push constant 0 INT
+pop local 4 INT
+LABEL #L1
+push local 4 INT
+push constant 5 INT
+lt
+JZ, goto end_#L1
+push local 0 ptr
+push local 2 INT
+getindex
+push local 4 INT
+push local 3 INT
+mul
+store INT
+push local 2 INT
+push constant 1 INT
+add
+pop local 2 INT
+push constant 1 INT
+sub
+push local 1 INT
+push local 0 ptr
+push local 2 INT
+getindex
+access int
+add
+pop local 1 INT
+push local 4 INT
+push constant 1 INT
+add
+pop local 4 INT
+push constant 1 INT
+sub
+goto #L1
+LABEL end_#L1
+push local 3 INT
+push constant 1 INT
+add
+pop local 3 INT
+push constant 1 INT
+sub
+goto #L0
+LABEL end_#L0
+push local 1 INT
+return
+halt

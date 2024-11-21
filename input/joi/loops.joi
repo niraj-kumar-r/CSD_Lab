@@ -1,0 +1,18 @@
+int joi()
+{
+    int a[25];
+    int sum = 0;
+    int k_loop = 0;
+    int i_loop = 0;
+    int j_loop = 0;
+    for i_loop = 0; i_loop < 5; i_loop++ :
+    {
+        for j_loop = 0; j_loop < 5; j_loop++ :
+        {
+            a[k_loop] = j_loop * i_loop;
+            k_loop++;
+            sum += a[k_loop];
+        }
+    }
+    return sum;
+}
