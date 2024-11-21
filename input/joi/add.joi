@@ -1,5 +1,7 @@
 int joi()
 {
-    int a = 6;
-    return a+7;
+    int a[5];
+    int sum = 0;
+    a[0] = 6;
+    return a[2]+7;
 }

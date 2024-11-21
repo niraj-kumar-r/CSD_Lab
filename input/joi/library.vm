@@ -1,0 +1,32 @@
+function joi 0 INT
+push constant 5 INT
+alloc 5 int
+pop local 0 ptr
+push constant 0 INT
+pop local 1 INT
+push constant 0 INT
+pop local 1 INT
+LABEL #L0
+push local 1 INT
+push constant 5 INT
+lt
+JZ, goto end_#L0
+push local 0 ptr
+push local 1 INT
+getindex
+push local 1 INT
+store INT
+push local 1 INT
+push constant 1 INT
+add
+pop local 1 INT
+push constant 1 INT
+sub
+goto #L0
+LABEL end_#L0
+push local 0 ptr
+push constant 0 INT
+getindex
+access int
+return
+halt

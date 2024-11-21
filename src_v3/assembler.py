@@ -7,6 +7,7 @@ instruction_encoding = {
     # SB-type instructions: have opcode and funct3
     # U-type instructions: have opcode
     # UJ-type instructions: have opcode
+    "lw": ("0000011", "010", "-1"), 
     "add": ("0110011", "000", "0000000"),
     "addu": ("0010000", "000", "0000000"),
     "sub": ("0110011", "000", "0100000"),
@@ -185,7 +186,8 @@ I_instr = [
     "andi" ,   "ori",  "xori",
     "nandi",  "nori", "xnori",
     "slli" ,  "srli", "srai" , 
-    "jalr"
+    "jalr",
+    "lw"
 ]
 
 S_instr = [

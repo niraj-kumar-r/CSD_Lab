@@ -1,7 +1,18 @@
 function joi 0 INT
+push constant 5 INT
+alloc 5 int
+pop local 0 ptr
+push constant 0 INT
+pop local 1 INT
+push local 0 ptr
+push constant 0 INT
+getindex
 push constant 6 INT
-pop local 0 INT
-push local 0 INT
+store INT
+push local 0 ptr
+push constant 2 INT
+getindex
+access int
 push constant 7 INT
 add
 return

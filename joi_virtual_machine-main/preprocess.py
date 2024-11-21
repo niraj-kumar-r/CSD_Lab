@@ -21,6 +21,7 @@ class Preprocess:
         for line in generator:
             line = re.sub(r'LABEL', 'label', line)
             line = re.sub(r'ptr', 'PTR', line)
+            line = re.sub(r'int', 'INT', line)
             line = re.sub(r'gte', 'ge\n', line)
             line = re.sub(r'lte', 'le\n', line)
             split_line = line.split(' ')
