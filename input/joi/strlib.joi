@@ -24,25 +24,7 @@ void strcpy(str destcpy, str srccpy)
     destcpy[i] = '\0'; ## Null terminate the destination string
 :
 
-## Function to compare two strings (similar to strcmp)
-int strcmp(str str1, str str2)
-:
-    i = 0;
-    
-    while str1[i] != '\0' && str2[i] != '\0' :
-    {
-        if str1[i] != str2[i] :
-        {
-            char diffChar = (str1[i] - str2[i]);
-            int diffInt = (int)diffChar;
-            return diffInt;
-        }
-        i++;
-    }
-    char diffChar1 = (str1[i] - str2[i]);
-    int diffInt1 = (int)diffChar;
-    return diffInt1;
-:
+
 
 ## Function to concatenate two strings (similar to strcat)
 void strcat(str dest, str src)
@@ -91,19 +73,20 @@ void to_lowercase(str strToLower)
 :
 
 ## Function to check if a string is a palindrome
-int is_palindrome(str strIsPalindrome)
+bool is_palindrome(str strIsPalindrome)
 :
     length = strlen(strIsPalindrome);
     i = 0;
+    bool is_palindrome_bool = true;
     while i < length / 2:
     {
         if strIsPalindrome[i] != strIsPalindrome[length - i - 1] :
         {
-            return 0; ## Not a palindrome
+            is_palindrome_bool = false; ## Not a palindrome
         }
         i++;
     }
-    return 1; ## Is a palindrome
+    return is_palindrome_bool; ## Is a palindrome
 :
 
 ## Function to reverse a string

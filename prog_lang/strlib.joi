@@ -160,3 +160,23 @@ void itoa(int numItoa, str strItoa)
     strItoa[i] = '\0';
     reverse(strItoa);
 :
+
+## Function to compare two strings (similar to strcmp)
+int strcmp(str str1, str str2)
+:
+    i = 0;
+    j = 0;
+    while str1[i] != '\0' && str2[i] != '\0' :
+    {
+        if str1[i] != str2[i] :
+        {
+            char diffChar = (str1[i] - str2[i]);
+            int diffInt = (int)diffChar;
+            return diffInt;
+        }
+        i++;
+    }
+    char diffChar1 = (str1[i] - str2[i]);
+    int diffInt1 = (int)diffChar;
+    return diffInt1;
+:

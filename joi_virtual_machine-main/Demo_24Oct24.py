@@ -611,10 +611,12 @@ class VM_Demo:
             pointer = None
             if (segment == Segment.local.value):
                 pointer = self.lcl
-                dict = self.lv_ofst[self.cur_function]
-                if index in dict:
+                dict = None
+                if self.cur_function in self.lv_ofst:
+                    dict = self.lv_ofst[self.cur_function]
+                if dict is not None and index in dict:
                     offset = dict[index]
-                if index + 1 not in dict:
+                if dict is not None and index + 1 not in dict:
                     next_offset = offset + self.data_size[datatype]
                     dict[index + 1] = next_offset
                 print(f"{pointer} + {offset} at index: {index}")
@@ -715,10 +717,12 @@ class VM_Demo:
         pointer = None
         if (segment == Segment.local.value):
             pointer = self.lcl
-            dict = self.lv_ofst[self.cur_function]
-            if index in dict:
+            dict = None
+            if self.cur_function in self.lv_ofst:
+                dict = self.lv_ofst[self.cur_function]
+            if dict is not None and index in dict:
                 offset = dict[index]
-            if index + 1 not in dict:
+            if dict is not None and index + 1 not in dict:
                 next_offset = offset + self.data_size[datatype]
                 dict[index + 1] = next_offset
             print(f"{pointer} + {offset} at index: {index}")

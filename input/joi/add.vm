@@ -1,0 +1,8 @@
+function joi 0 INT
+push constant 6 INT
+pop local 0 INT
+push local 0 INT
+push constant 7 INT
+add
+return
+halt

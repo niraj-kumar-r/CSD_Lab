@@ -1,0 +1,5 @@
+int joi()
+{
+    int a = 6;
+    return a + 7;
+}
