@@ -37,13 +37,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# # Step 3: Run the assembler
-# echo "Running assembler on $VM_OUTPUT..."
-# python3 assembler.py "$VM_OUTPUT" "$ASSEMBLER_OUTPUT"
-# if [ $? -ne 0 ]; then
-#   echo "Error: Assembler execution failed."
-#   exit 1
-# fi
+# Step 3: Run the assembler
+echo "Running assembler on $VM_OUTPUT..."
+python3 ./src_v3/main.py "$VM_OUTPUT" "$ASSEMBLER_OUTPUT"
+if [ $? -ne 0 ]; then
+  echo "Error: Assembler execution failed."
+  exit 1
+fi
 
-# echo "Process completed successfully!"
-# echo "Output files: $COMPILED_FILE, $VM_OUTPUT, $ASSEMBLER_OUTPUT"
+echo "Process completed successfully!"
+echo "Output files: $COMPILED_FILE, $VM_OUTPUT, $ASSEMBLER_OUTPUT"
