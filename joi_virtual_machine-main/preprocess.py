@@ -32,7 +32,7 @@ class Preprocess:
             if line.startswith('JZ,'):
                 parts = line.split(',')
                 original_label = parts[1].strip()
-
+                original_label = re.sub(r'#', '__', original_label)
                 # Generate a unique dummy label
                 dummy_label = f"{original_label}_no"
 

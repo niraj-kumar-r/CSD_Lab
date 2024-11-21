@@ -7,7 +7,6 @@ instruction_encoding = {
     # SB-type instructions: have opcode and funct3
     # U-type instructions: have opcode
     # UJ-type instructions: have opcode
-    "lw": ("0000011", "010", "-1"), 
     "add": ("0110011", "000", "0000000"),
     "addu": ("0010000", "000", "0000000"),
     "sub": ("0110011", "000", "0100000"),
@@ -106,6 +105,7 @@ instruction_encoding = {
     "srli": ("0010011", "101", "0000000"),
     "srai": ("0010011", "101", "0100000"),
     "jalr": ("1100111", "000", "-1"),
+    "lw": ("0000011", "010", "-1"),
 
     "beq": ("1100011", "000", "-1"),
     "bne": ("1100011", "001", "-1"),
@@ -186,8 +186,7 @@ I_instr = [
     "andi" ,   "ori",  "xori",
     "nandi",  "nori", "xnori",
     "slli" ,  "srli", "srai" , 
-    "jalr",
-    "lw"
+    "jalr", "lw"
 ]
 
 S_instr = [
@@ -325,9 +324,16 @@ class Assembler:
                     print(self.binary_instructions[-1])
                 elif mnemonic in I_instr:
                     rd = register_mapping[parts[1]]
-                    rs1 = register_mapping[parts[2]]
                     # immediate value is an int in decimal
-                    imm_val = int(parts[3])
+                    if mnemonic=="lw":
+                        # rs1 will be <offset>(rs1)
+                        rs1 = parts[2].split("(")[1][:-1]
+                        rs1 = register_mapping[rs1]
+                        imm_val = int(parts[2].split("(")[0])
+                    else:
+                        rs1 = register_mapping[parts[2]]
+                        imm_val = int(parts[3])
+                    print(rs1, imm_val)
                     if imm_val < 0:
                         imm = format((1 << 12) + imm_val, '012b')
                     else:
@@ -382,25 +388,20 @@ class Assembler:
             address = i
             print(f"{instruction}")
 
-# lines = """
-# .section
-# .data
-# .section
-# .text
-# jal x30,main
-# main:
-# lui x5,2
-# addi x5,x5,10
-# addi x5,x5,10
-# addi x5,x5,10
-# addi x5,x5,2
-# lui x6,2
-# """
+lines = """
+.section
+.data
+.section
+.text
+jal x30,main
+main:
+lw x1,0(x0)
+"""
 
-# assembler = Assembler()
-# assembler.first_pass(lines)
-# assembler.symbol_table.print_symbol_table()
-# assembler.second_pass()
-# assembler.print_binary_data_section()
-# assembler.print_binary_text_section()
+assembler = Assembler()
+assembler.first_pass(lines)
+assembler.symbol_table.print_symbol_table()
+assembler.second_pass()
+assembler.print_binary_data_section()
+assembler.print_binary_text_section()
 

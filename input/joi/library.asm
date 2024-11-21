@@ -136,9 +136,9 @@ addi x2,x2,4
 addi x2,x2,-4
 lw x5,0(x2)
 addi x6,x0,1
-beq x5,x6,__end_#L0_no
-jal x30,__end_#L0
-__end_#L0_no:
+beq x5,x6,__end___L0_no
+jal x30,__end___L0
+__end___L0_no:
 lui x5,2
 addi x5,x5,4
 add x5,x5,x8
