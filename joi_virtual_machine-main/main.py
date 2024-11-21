@@ -82,7 +82,7 @@ if __name__ == '__main__':
     # Get paths for the main file and helper files from arguments
     script_dir = os.path.dirname(__file__)
     main_file_path = sys.argv[1]
-    save_path='./actual_outputs/'+sys.argv[-1]+'.asm'
+    save_path= sys.argv[-1]+'.asm'
     main_abs_path = os.path.join(script_dir, main_file_path)
     
     # Load main file content
