@@ -51,8 +51,8 @@ void strcat(str dest, str src)
     {
         i++; ## Move to the end of the destination string
     }
-    j = 0
-    while src[j] != '\0':
+    j = 0;
+    while src[j] != '\0' :
     {
         dest[i] = src[j]; ## Copy each character from src to dest
         i++;
