@@ -1,18 +1,23 @@
 constant int MAX = 10; ## Set a maximum size for the matrix
 
 ## Function to perform Gaussian elimination to find the inverse of a matrix
-bool inverseMatrix(float matrix[MAX][MAX], float inverse[MAX][MAX], int n) :
+bool inverseMatrix(float $matrix, float $inverse, int n) :
     ## Initialize the inverse matrix as the identity matrix
     for int i = 0; i < n; i++ :
     {
         for int j = 0; j < n; j++ :
         {
-            inverse[i][j] = (i == j) ? 1.0 : 0.0;
+            if i==j:{
+                inverse[i][j] = 1.0;
+            }
+            else:{
+                inverse[i][j] = 0.0;
+            }
         }
     }
 
     ## Perform Gaussian elimination
-    for int i = 0; i < n; i++ :
+    for i = 0; i < n; i++ :
     {
         ## Find pivot element
         float pivot = matrix[i][i];
@@ -23,7 +28,7 @@ bool inverseMatrix(float matrix[MAX][MAX], float inverse[MAX][MAX], int n) :
         }
 
         ## Normalize the pivot row
-        for int j = 0; j < n; j++ :
+        for j = 0; j < n; j++ :
         {
             matrix[i][j] /= pivot;
             inverse[i][j] /= pivot;
@@ -35,10 +40,10 @@ bool inverseMatrix(float matrix[MAX][MAX], float inverse[MAX][MAX], int n) :
             if k != i :
             {
                 float factor = matrix[k][i];
-                for int j = 0; j < n; j++ :
+                for j = 0; j < n; j++ :
                 {
                     matrix[k][j] -= factor * matrix[i][j];
-                    inverse[k][j] -= factor * inverse[i][j];
+ inverse[k][j] -= factor * inverse[i][j];
                 }
             }
         }
@@ -48,40 +53,43 @@ bool inverseMatrix(float matrix[MAX][MAX], float inverse[MAX][MAX], int n) :
 :
 
 int joi() {
-    int n;
+    int _n;
     cout << "Enter the size of the matrix (n * n): ";
-    cin >> n;
+    cin >> _n;
 
-    if n > MAX :
+    if _n > MAX :
     {
         cout << "Matrix size exceeds the maximum allowed size of " << MAX << "." << endl;
         return 1;
     }
 
-    float matrix[MAX][MAX], inverse[MAX][MAX];
+    float _matrix[MAX][MAX];
+    float _inverse[MAX][MAX];
 
     cout << "Enter the elements of the matrix:" << endl;
-    for int i = 0; i < n; i++ :
+    for i = 0; i < _n; i++ :
     {
-        for int j = 0; j < n; j++ :
+        for j = 0; j < _n; j++ :
         {
-            cin >> matrix[i][j];
+            float temp;
+            cin >> temp;
+            matrix[i][j] = temp;
         }
     }
 
-    if inverseMatrix(matrix, inverse, n) :
+    if inverseMatrix(_matrix, _inverse, _n) :
     {
         cout << "The inverse of the matrix is: " << endl;
-        for int i = 0; i < n; i++ :
+        for i = 0; i < _n; i++ :
         {
-            for int j = 0; j < n; j++ :
+            for j = 0; j < _n; j++ :
             {
                 cout << inverse[i][j] << "\t";
             }
             cout << endl;
         }
     }
-    else :
+ else :
     {
         cout << "The matrix has no inverse." << endl;
     }
